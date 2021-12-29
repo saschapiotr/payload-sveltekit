@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:admin": "cd admin && npm run dev &",
+    "dev:frontend": "cd frontend && npm run dev &",
+    "dev:success": "echo 'development servers started successfully!'",
+    "dev": "npm run dev:admin && npm run dev:frontend && npm run dev:success"
   },
   "repository": {
     "type": "git",

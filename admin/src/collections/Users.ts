@@ -9,10 +9,7 @@ const Users: CollectionConfig = {
   access: {
     read: () => true,
   },
-  fields: [
-    // Email added by default
-    // Add more fields as needed
-  ],
+  fields: [],
 };
 
 export default Users;
