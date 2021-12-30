@@ -1,5 +1,5 @@
-import { CollectionConfig } from 'payload/types';
-import { open, editor } from '../access/';
+import { CollectionConfig, CollectionAfterChangeHook } from 'payload/types';
+import { open, editor } from '../access';
 
 const Posts: CollectionConfig = {
   slug: 'posts',
@@ -7,7 +7,7 @@ const Posts: CollectionConfig = {
     useAsTitle: 'Posts',
   },
   access: {
-    read: open,
+    read: open, 
     create: editor,
     update: editor,
     delete: editor,
@@ -18,6 +18,9 @@ const Posts: CollectionConfig = {
       type: 'text',
     },
   ],
+  hooks: {
+    afterChange: () => {},
+  }
 }
 
 export default Posts;

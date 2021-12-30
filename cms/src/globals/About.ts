@@ -1,5 +1,5 @@
 import { GlobalConfig } from 'payload/types';
-import { admin, open } from '../access/';
+import { admin, open } from '../access';
 
 const About: GlobalConfig = {
   slug: 'about',
