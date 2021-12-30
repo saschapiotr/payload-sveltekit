@@ -1,5 +1,5 @@
 
-type Req = { method?: string, base: string, path: string, data?: string, token: string }
+type Req = { method?: string, base: string, path: string, data?: string, token?: string }
 type Res = Promise<{response: Response, json: string}>;
 
 export const send = async ({ method, base, path, data, token }: Req)
@@ -24,4 +24,7 @@ export const send = async ({ method, base, path, data, token }: Req)
 }
 
 export const get = ({base, path, token} : Req)
-  : Res => send({method: 'GET', base, path, token})
+  : Res => send({method: 'GET', base, path, token});
+
+export const post = ({base, path, data} : Req)
+: Res => send({method: 'POST', base, path, data});
