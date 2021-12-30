@@ -4,20 +4,27 @@
     const { response, json } = await api.get({base: session.BASE_ENDPOINT, path: 'posts'});
     const success = page.query.get('success') ? 'Success!' : undefined;
     const error = page.query.get('error') ? 'Error!' : undefined;
-    return {
-      props: {
-        response: response.status,
-        success,
-        error,
-      }
+    if (response.status === 200) {
+      return {
+        props: {
+          posts: json.docs,
+          success,
+          error,
+        },
+      };
+    } else {
+      return { props: { posts: [], success, error } };
     }
   }
 </script>
 
 <script>
-  export let response; //, success = '', error = '';
+  export let posts;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<h2>{response}</h2>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>Welcome to my Blog</h1>
+
+{#each posts as post}
+  <h1>{post.title}</h1>
+  <p>{post.updatedAt}
+{/each}
