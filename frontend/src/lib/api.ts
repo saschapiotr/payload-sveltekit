@@ -17,6 +17,7 @@ const send = async ({ method, base, path, data, token }: Req)
   if(token) {
     opts.headers['Authorization'] = `Token ${token}`
   }
+  console.log(`${base}/${path}`)
 
   const response = await fetch(encodeURI(`${base}/${path}`), opts);
   const json: any = await response.json();
