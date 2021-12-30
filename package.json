@@ -28,7 +28,7 @@
     }
   },
   "workspaces": [
-    "admin",
+    "backend",
     "web"
   ]
 }
