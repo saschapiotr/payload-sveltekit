@@ -1,7 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import checkRole from '../access/checkRole';
-
-const access = ({ req: { user } }) => checkRole(['admin', 'editor'], user);
+import { open, editor } from '../access/';
 
 const Posts: CollectionConfig = {
   slug: 'posts',
@@ -9,10 +7,10 @@ const Posts: CollectionConfig = {
     useAsTitle: 'Posts',
   },
   access: {
-    read: () => true,
-    create: access,
-    update: access,
-    delete: access,
+    read: open,
+    create: editor,
+    update: editor,
+    delete: editor,
   },
   fields: [
     {

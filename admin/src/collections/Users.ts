@@ -1,8 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import checkRole from '../access/checkRole';
-import roles from '../access/roles';
-
-const access = ({ req: { user } }) => checkRole(['admin'], user);
+import { admin, editor, roles } from '../access/';
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -11,11 +8,11 @@ const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   access: {
-    read: access,
-    create: access,
-    update: access,
-    delete: access,
-    admin: ()  => true,
+    read: admin,
+    create: admin,
+    update: admin,
+    delete: admin,
+    admin: editor,
   },
   fields: [
     {
