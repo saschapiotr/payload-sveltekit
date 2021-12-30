@@ -1,10 +1,9 @@
-
-type Req = { method?: string, base: string, path: string, data?: string, token?: string }
+type Req = { method?: string, base: string, path: string, data?: string, fetch: any }
 type Res = Promise<{response: Response, json: string}>;
 
 export type Endpoint = { status: number, body: string, headers: any }
 
-const send = async ({ method, base, path, data, token }: Req)
+const send = async ({ method, base, path, data, fetch }: Req)
   : Res => {
 
   const opts: any = { method, headers: {} }
@@ -14,9 +13,6 @@ const send = async ({ method, base, path, data, token }: Req)
     opts.body = JSON.stringify(data);
   }
 
-  if(token) {
-    opts.headers['Authorization'] = `Token ${token}`
-  }
   console.log(`${base}/${path}`)
 
   const response = await fetch(encodeURI(`${base}/${path}`), opts);
@@ -26,8 +22,8 @@ const send = async ({ method, base, path, data, token }: Req)
 
 }
 
-export const get = ({base, path, token} : Req)
-  : Res => send({method: 'GET', base, path, token});
+export const get = ({base, path, fetch} : Req)
+  : Res => send({method: 'GET', base, path, fetch});
 
-export const post = ({base, path, data} : Req)
-: Res => send({method: 'POST', base, path, data});
+export const post = ({base, path, data, fetch} : Req)
+: Res => send({method: 'POST', base, path, data, fetch});

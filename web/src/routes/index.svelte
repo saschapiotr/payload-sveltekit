@@ -1,10 +1,10 @@
 <script context="module" lang="ts">
   import * as api from '$lib/api';
-  export const load = async ({session}) => {
+  export const load = async ({session, fetch }) => {
     const { response, json } = await api.get(
-      { base: session.BASE_ENDPOINT, path: 'posts' }
+      { base: session.API_ENDPOINT, path: 'api/posts', fetch: fetch }
     );
-    console.log(json)
+
     if (response.status === 200) {
       return {
         props: {
