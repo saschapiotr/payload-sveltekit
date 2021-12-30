@@ -4,7 +4,7 @@
     const { response, json } = await api.get(
       { base: session.BASE_ENDPOINT, path: 'posts' }
     );
-
+    console.log(json)
     if (response.status === 200) {
       return {
         props: {
@@ -24,7 +24,7 @@
 <h1>Welcome to my Blog</h1>
 
 {#each posts as post}
-  <a href="{post.slug}">
+  <a href="{`/posts/${post.slug}`}">
     <h1>{post.title}</h1>
   </a>
   <p>{post.updatedAt}</p>
