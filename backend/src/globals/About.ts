@@ -2,7 +2,7 @@ import { GlobalConfig } from 'payload/types';
 import { admin, open } from '../access/';
 
 const About: GlobalConfig = {
-  slug: 'global',
+  slug: 'about',
   label: 'Über Uns',
   access: {
     read: open,
