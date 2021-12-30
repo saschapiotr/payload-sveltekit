@@ -20,4 +20,7 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts')
   },
+  cors: [
+    'http://localhost:3000',
+  ],
 });
