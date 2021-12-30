@@ -2,7 +2,9 @@
 type Req = { method?: string, base: string, path: string, data?: string, token?: string }
 type Res = Promise<{response: Response, json: string}>;
 
-export const send = async ({ method, base, path, data, token }: Req)
+export type Endpoint = { status: number, body: string, headers: any }
+
+const send = async ({ method, base, path, data, token }: Req)
   : Res => {
 
   const opts: any = { method, headers: {} }
