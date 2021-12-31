@@ -15,26 +15,10 @@ const About: GlobalConfig = {
       type: 'text',
     },
     {
-      name: 'content',
-      label: 'Inhalt',
-      type: 'richText',
-      defaultValue: [{
-        children: [{ text: '...' }],
-      }],
-      required: true,
-      admin: {
-        elements: [
-          'h2',
-          'h3',
-          'h4',
-          'link'
-        ],
-        elements: [
-          'bold',
-          'italic'
-        ]
-      }
-    }
+      name: 'description',
+      label: 'Description',
+      type: 'textarea',
+    },
   ],
 };
 

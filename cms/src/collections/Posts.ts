@@ -28,6 +28,11 @@ const Posts: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'description',
+      label: 'Description',
+      type: 'textarea',
+    },
+    {
       name: 'slug',
       label: 'Url',
       type: 'text',
