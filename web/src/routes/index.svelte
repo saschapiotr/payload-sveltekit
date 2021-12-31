@@ -23,7 +23,7 @@
   export let posts;
 </script>
 
-<h1>Welcome to my Blog</h1>
+<h1 class="text-2xl font-bold">Welcome to my Blog</h1>
 
 {#each posts as post}
   <PostCard {post} />

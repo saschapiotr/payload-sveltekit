@@ -22,4 +22,6 @@
   export let post;
 </script>
 
-<h2>This is {post.title}</h2>
+<article class="mt-6 bg-white p-6 rounded-md text-gray-500 shadow-lg w-4/12 h-full">
+  <h2 class="text-2xl font-bold">This is {post.title}</h2>
+</article>

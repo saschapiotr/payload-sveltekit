@@ -22,4 +22,6 @@
   export let global;
 </script>
 
-<h2>This is {global.title}</h2>
+<article class="mt-6 p-6 w-4/12 h-full">
+  <h2 class="text-2xl font-bold">This is {global.title}</h2>
+</article>
