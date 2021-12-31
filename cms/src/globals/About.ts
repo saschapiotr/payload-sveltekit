@@ -1,7 +1,6 @@
 import { GlobalConfig } from 'payload/types';
 import { admin, open } from '../access';
 
-import Heading from '../blocks/Heading';
 import Text from '../blocks/Text';
 
 const About: GlobalConfig = {
@@ -30,7 +29,7 @@ const About: GlobalConfig = {
         plural: 'Layouts',
       },
       type: 'blocks',
-      blocks: [Heading, Text],
+      blocks: [Text],
       required: true,
     },
   ],
