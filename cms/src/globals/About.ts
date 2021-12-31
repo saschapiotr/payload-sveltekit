@@ -1,6 +1,9 @@
 import { GlobalConfig } from 'payload/types';
 import { admin, open } from '../access';
 
+import Heading from '../blocks/Heading';
+import Text from '../blocks/Text';
+
 const About: GlobalConfig = {
   slug: 'about',
   label: 'About',
@@ -18,6 +21,17 @@ const About: GlobalConfig = {
       name: 'description',
       label: 'Description',
       type: 'textarea',
+    },
+    {
+      name: 'layout',
+      label: 'Layout',
+      labels: {
+        singular: 'Layout',
+        plural: 'Layouts',
+      },
+      type: 'blocks',
+      blocks: [Heading, Text],
+      required: true,
     },
   ],
 };

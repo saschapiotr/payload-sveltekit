@@ -1,4 +1,4 @@
-import { CollectionConfig, CollectionAfterChangeHook } from 'payload/types';
+import { CollectionConfig } from 'payload/types';
 import { open, closed, editor } from '../access';
 
 const Posts: CollectionConfig = {

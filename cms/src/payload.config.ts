@@ -3,6 +3,7 @@ import path from 'path';
 
 import Posts from './collections/Posts';
 import Users from './collections/Users';
+import Media from './collections/Media';
 import About from './globals/About';
 
 export default buildConfig({
@@ -13,6 +14,7 @@ export default buildConfig({
   collections: [
     Users,
     Posts,
+    Media,
   ],
   globals: [
     About,
