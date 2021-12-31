@@ -2,10 +2,10 @@
   import "../app.css";
 </script>
 
-<main>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/about">Über Uns</a>
-  </nav>
+<nav>
+  <a href="/">Home</a>
+  <a href="/about">Über Uns</a>
+</nav>
+<main class="container mx-auto">
   <slot />
 </main>
