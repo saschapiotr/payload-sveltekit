@@ -22,6 +22,8 @@
   export let post;
 </script>
 
-<article class="mt-6 bg-white p-6 rounded-md text-gray-500 shadow-lg w-4/12 h-full">
-  <h2 class="text-2xl font-bold">This is {post.title}</h2>
+<article class="mt-6 bg-white p-6 rounded-md text-gray-500 shadow-lg w-6/12 h-full">
+  <h2 class="text-2xl font-bold pb-5">{post.title}</h2>
+  <p class="text-lg">{post.description}</p>
+  <p class="mt-3">{post.updatedAt}</p>
 </article>
