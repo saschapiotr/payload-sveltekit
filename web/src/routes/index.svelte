@@ -18,14 +18,13 @@
 </script>
 
 <script>
+  import PostCard from '$lib/ui/post-card.svelte';
+
   export let posts;
 </script>
 
 <h1>Welcome to my Blog</h1>
 
 {#each posts as post}
-  <a href="{`/posts/${post.slug}`}">
-    <h1>{post.title}</h1>
-  </a>
-  <p>{post.updatedAt}</p>
+  <PostCard {post} />
 {/each}
