@@ -1,3 +1,7 @@
+<script>
+  import "../app.css";
+</script>
+
 <main>
   <nav>
     <a href="/">Home</a>
