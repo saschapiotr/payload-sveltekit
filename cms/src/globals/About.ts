@@ -3,7 +3,7 @@ import { admin, open } from '../access';
 
 const About: GlobalConfig = {
   slug: 'about',
-  label: 'Über Uns',
+  label: 'About',
   access: {
     read: open,
     update: admin,
