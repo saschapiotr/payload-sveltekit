@@ -3,7 +3,7 @@
   export const load = async ({params, session, fetch}) => {
 
     const { response, json } = await api.get(
-      { base: session.API_ENDPOINT, path: `api/posts?where[slug][equals]=${params.slug}`, fetch: fetch }
+      { base: session.API_ENDPOINT, path: `api/posts?where[slug][equals]=${params.slug}`, kitFetch: fetch }
     );
 
     if (response.status === 200) {

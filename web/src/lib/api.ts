@@ -1,9 +1,9 @@
-type Req = { method?: string, base: string, path: string, data?: string, fetch: any }
+type Req = { method?: string, base: string, path: string, data?: string, kitFetch?: any }
 type Res = Promise<{response: Response, json: string}>;
 
 export type Endpoint = { status: number, body: string, headers: any }
 
-const send = async ({ method, base, path, data, fetch }: Req)
+const send = async ({ method, base, path, data, kitFetch }: Req)
   : Res => {
 
   const opts: any = { method, headers: {} }
@@ -13,17 +13,16 @@ const send = async ({ method, base, path, data, fetch }: Req)
     opts.body = JSON.stringify(data);
   }
 
-  console.log(`${base}/${path}`)
-
-  const response = await fetch(encodeURI(`${base}/${path}`), opts);
+  const uri = encodeURI(`${base}/${path}`);
+  const response = kitFetch ? await kitFetch(uri, opts) : await fetch(uri,opts);
+  
   const json: any = await response.json();
 
   return { response, json }
-
 }
 
-export const get = ({base, path, fetch} : Req)
-  : Res => send({method: 'GET', base, path, fetch});
+export const get = ({base, path, kitFetch} : Req)
+  : Res => send({method: 'GET', base, path, kitFetch});
 
-export const post = ({base, path, data, fetch} : Req)
-: Res => send({method: 'POST', base, path, data, fetch});
+export const post = ({base, path, data, kitFetch} : Req)
+: Res => send({method: 'POST', base, path, data, kitFetch});
