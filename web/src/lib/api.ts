@@ -1,5 +1,5 @@
 type Req = { method?: string, base: string, path: string, data?: string, kitFetch?: any }
-type Res = Promise<{response: Response, json: string}>;
+type Res = Promise<{response: Response, json: any}>;
 
 export type Endpoint = { status: number, body: string, headers: any }
 
