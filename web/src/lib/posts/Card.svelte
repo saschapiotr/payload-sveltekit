@@ -1,5 +1,7 @@
 <script>
   export let post;
+
+  import * as api from '$lib/api';
 </script>
 
 <article class="mt-6 bg-white p-6 rounded-md text-gray-500 shadow-lg w-4/12 h-full">

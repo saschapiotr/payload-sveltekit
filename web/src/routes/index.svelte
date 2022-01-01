@@ -18,7 +18,7 @@
 </script>
 
 <script>
-  import PostCard from '$lib/ui/post-card.svelte';
+  import PostCard from '$lib/posts/Card.svelte';
 
   export let posts;
 </script>

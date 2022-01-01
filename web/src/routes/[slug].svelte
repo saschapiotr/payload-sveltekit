@@ -17,12 +17,12 @@
   }
 </script>
 
-
-<script>
+<script lang="ts">
+  import BlocksLayout from '$lib/blocks/Layout.svelte';
   export let global;
 </script>
 
 <article class="mt-6 p-6 w-6/12 h-full">
-  <h2 class="text-2xl font-bold pb-5">{global.title}</h2>
-  <h2 class="text-lg">{global.description}</h2>
+  <h1 class="text-2xl font-bold pb-5">{global.title}</h1>
+  <BlocksLayout layout={global.layout} {fetch} />
 </article>
