@@ -13,5 +13,6 @@ const roles = [ 'admin', 'editor' ];
 const admin = ({ req: { user } }) => checkRole(['admin'], user);
 const editor = ({ req: { user } }) => checkRole(['admin', 'editor'], user);
 const open = () => true;
+const closed = () => false;
 
-export { admin, editor, open, roles };
+export { admin, editor, open, closed, roles };
