@@ -16,16 +16,10 @@ const Text: Block = {
         elements: [
           'h1',
           'h2',
-          'h3',
-          'h4',
           'link',
-          'ol',
           'upload'
         ],
-        leaves: [
-          'bold',
-          'italic'
-        ],
+        leaves: [],
       },
     },
   ],
