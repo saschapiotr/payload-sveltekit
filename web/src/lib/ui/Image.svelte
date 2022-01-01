@@ -2,7 +2,6 @@
 import { dataset_dev } from "svelte/internal";
 
   export let mediaData;
-  console.log(mediaData)
 </script>
 
 {#await mediaData}
