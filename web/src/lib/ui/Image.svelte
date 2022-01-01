@@ -1,5 +1,12 @@
 <script>
-  export let source, alt;
+import { dataset_dev } from "svelte/internal";
+
+  export let mediaData;
+  console.log(mediaData)
 </script>
 
-<img src="{source}" alt="{alt}" />
+{#await mediaData}
+	<p>...loading image</p>
+{:then data}
+  <img src={data.src} alt={data.src} />
+{/await}

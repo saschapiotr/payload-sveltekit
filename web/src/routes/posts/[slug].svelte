@@ -1,11 +1,9 @@
 <script context="module" lang="ts">
   import * as api from '$lib/api';
   export const load = async ({params, session, fetch}) => {
-
     const { response, json } = await api.get(
-      { path: `api/posts?where[slug][equals]=${params.slug}`, kitFetch: fetch }
+      { base: session.API_ENDPOINT, path: `api/posts?where[slug][equals]=${params.slug}`, kitFetch: fetch }
     );
-
     if (response.status === 200) {
       return {
         props: {

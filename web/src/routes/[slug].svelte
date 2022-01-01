@@ -2,13 +2,13 @@
   import * as api from '$lib/api';
   export const load = async ({params, session, fetch}) => {
     const { response, json } = await api.get(
-      { path: `api/globals/${params.slug}`, kitFetch: fetch }
+      { base: session.API_ENDPOINT, path: `api/globals/${params.slug}`, kitFetch: fetch }
     );
-
     if (response.status === 200) {
       return {
         props: {
           global: json,
+          endpoint: session.API_ENDPOINT,
         },
       };
     } else {
@@ -19,10 +19,10 @@
 
 <script lang="ts">
   import BlocksLayout from '$lib/blocks/Layout.svelte';
-  export let global;
+  export let global, endpoint;
 </script>
 
 <article class="mt-6 p-6 w-6/12 h-full">
   <h1 class="text-2xl font-bold pb-5">{global.title}</h1>
-  <BlocksLayout layout={global.layout} {fetch} />
+  <BlocksLayout layout={global.layout} base={endpoint} {fetch} />
 </article>
