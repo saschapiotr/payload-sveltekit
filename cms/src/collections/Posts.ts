@@ -1,6 +1,8 @@
 import { CollectionConfig } from 'payload/types';
 import { open, closed, editor } from '../access';
 
+import Text from '../blocks/Text';
+
 const Posts: CollectionConfig = {
   slug: 'posts',
   labels: {
@@ -31,6 +33,17 @@ const Posts: CollectionConfig = {
       name: 'description',
       label: 'Description',
       type: 'textarea',
+    },
+    {
+      name: 'layout',
+      label: 'Layout',
+      labels: {
+        singular: 'Layout',
+        plural: 'Layouts',
+      },
+      type: 'blocks',
+      blocks: [Text],
+      required: true,
     },
     {
       name: 'slug',
