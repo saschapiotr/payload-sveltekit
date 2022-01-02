@@ -1,6 +1,19 @@
 version: "3.9"
 
 services:
+  web:
+    build:
+      context: ./web
+      dockerfile: ./Dockerfile.dev
+    restart: always
+    ports:
+      - "3000:3000"
+      - "24678:24678"
+    volumes:
+      - ./web/src:/usr/app/src
+    network_mode: host
+    depends_on:
+      - cms
   cms:
     build:
       context: ./cms
