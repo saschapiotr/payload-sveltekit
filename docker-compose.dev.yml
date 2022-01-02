@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  cms:
+    build:
+      context: ./cms
+      dockerfile: ./Dockerfile.dev
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./cms/src:/usr/app/src
+    environment:
+      - MONGODB_URL=${MONGODB_URL}
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+      - PAYLOAD_PORT=${PAYLOAD_PORT}
+      - PAYLOAD_SERVER_URL=${PAYLOAD_SERVER_URL}
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+
+    
