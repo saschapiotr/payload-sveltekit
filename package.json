@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "sudo docker-compose -f docker-compose.dev.yml up --remove-orphans",
-    "dev:build": "sudo docker-compose -f docker-compose.dev.yml up --build web cms --force-recreate --remove-orphans"
+    "dev": "sudo docker-compose -f docker-compose.dev.yml --env-file ./.env.development up --remove-orphans",
+    "dev:rebuild": "sudo docker-compose -f docker-compose.dev.yml --env-file ./.env.development up --build web cms --force-recreate --remove-orphans",
+    "dev:detach": "sudo docker-compose -f docker-compose.dev.yml --env-file ./.env.development up -d --remove-orphans"
   },
   "repository": {
     "type": "git",
