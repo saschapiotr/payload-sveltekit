@@ -2,7 +2,7 @@
   import * as api from '$lib/api';
   export const load = async ({params, session, fetch}) => {
     const { response, json } = await api.get(
-      { base: session.API_ENDPOINT, path: `api/globals/${params.slug}`, kitFetch: fetch }
+      { base: session.BASE_ENDPOINT, path: `globals/${params.slug}` }
     );
     if (response.status === 200) {
       return {

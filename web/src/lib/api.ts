@@ -1,9 +1,9 @@
-type Req = { method?: string, base: string, path: string, data?: string, kitFetch?: any }
+type Req = { method?: string, base: string, path: string, data?: string }
 type Res = Promise<{response: Response, json: any}>;
 
 export type Endpoint = { status: number, body: string, headers: any }
 
-const send = async ({ method, base, path, data, kitFetch }: Req)
+const send = async ({ method, base, path, data }: Req)
   : Res => {
 
   const opts: any = { method, headers: {} }
@@ -14,15 +14,15 @@ const send = async ({ method, base, path, data, kitFetch }: Req)
   }
 
   const uri = encodeURI(`${base}/${path}`);
-  const response = kitFetch ? await kitFetch(uri, opts) : await fetch(uri,opts);
+  const response = await fetch(uri,opts);
   
   const json: any = await response.json();
 
   return { response, json }
 }
 
-export const get = ({base, path, kitFetch} : Req)
-  : Res => send({method: 'GET', base, path, kitFetch});
+export const get = ({base, path } : Req)
+  : Res => send({method: 'GET', base, path });
 
-export const post = ({base, path, data, kitFetch} : Req)
-: Res => send({method: 'POST', base, path, data, kitFetch});
+export const post = ({base, path, data } : Req)
+: Res => send({method: 'POST', base, path, data });
