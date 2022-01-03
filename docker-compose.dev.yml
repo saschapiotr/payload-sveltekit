@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   web:
+    container_name: ${WEB_CONTAINER_NAME}
     build:
       context: ./web
       dockerfile: ./Dockerfile.dev
@@ -11,10 +12,14 @@ services:
       - "24678:24678"
     volumes:
       - ./web/src:/usr/app/src
+    environment:
+      - VITE_BASE_ENDPOINT=${VITE_BASE_ENDPOINT}
+      - VITE_API_ENDPOINT=${VITE_API_ENDPOINT}
     network_mode: host
     depends_on:
       - cms
   cms:
+    container_name: ${CMS_CONTAINER_NAME}
     build:
       context: ./cms
       dockerfile: ./Dockerfile.dev
@@ -24,6 +29,7 @@ services:
     volumes:
       - ./cms/src:/usr/app/src
     environment:
+      - MONGO_CONTAINER_NAME=${MONGO_CONTAINER_NAME}
       - MONGODB_URL=${MONGODB_URL}
       - PAYLOAD_SECRET=${PAYLOAD_SECRET}
       - PAYLOAD_PORT=${PAYLOAD_PORT}
@@ -31,8 +37,8 @@ services:
     depends_on:
       - mongo
   mongo:
+    container_name: ${MONGO_CONTAINER_NAME}
     image: mongo:latest
-    container_name: mongo
     restart: always
     volumes:
       - ./mongo/data:/data/db

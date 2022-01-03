@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "sudo docker-compose -f docker-compose.dev.yml up --remove-orphans",
-    "dev:rebuild": "sudo docker-compose -f docker-compose.dev.yml up --rebuild --remove-orphans"
+    "dev:build": "sudo docker-compose -f docker-compose.dev.yml up --build web cms --force-recreate --remove-orphans"
   },
   "repository": {
     "type": "git",
