@@ -6,16 +6,17 @@
 
   import * as api from '$lib/api';
 
-  export let content, fetch, base;
+  export let content, fetch;
  
   const elements = [];
 
   const mediaData = async (id) => {
-    const { json } = await api.get({ base, path: `api/media/${id}`, kitFetch: fetch });
-    return {
-      src: json.url,
-      alt: json.alt,
-    };
+    const { res, body } = await api.get(`media/${id}`, fetch) as { res: Response, body: any };
+
+    if(res.status === 200) {
+      const { alt, ...media} = body;
+      return { alt, src: media.url }
+    }
   };
 
   content.forEach(element => {

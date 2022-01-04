@@ -1,7 +1,5 @@
 <script>
-import { dataset_dev } from "svelte/internal";
-
-  export let mediaData;
+export let mediaData;
 </script>
 
 {#await mediaData}

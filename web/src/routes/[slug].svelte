@@ -1,28 +1,21 @@
 <script context="module" lang="ts">
-  import * as api from '$lib/api';
-  export const load = async ({params, session, fetch}) => {
-    const { response, json } = await api.get(
-      { base: session.BASE_ENDPOINT, path: `globals/${params.slug}` }
-    );
-    if (response.status === 200) {
-      return {
-        props: {
-          global: json,
-          endpoint: session.API_ENDPOINT,
-        },
-      };
-    } else {
-      return { props: { global: null } };
+  export const load = async ({params, fetch}) => {
+    const { slug } = params;
+
+    const res = await fetch(`globals/${slug}`);
+
+    if (res.status === 200) {
+      return { props: { global: await res.json(), fetch } }
     }
   }
 </script>
 
 <script lang="ts">
   import BlocksLayout from '$lib/blocks/Layout.svelte';
-  export let global, endpoint;
+  export let global, fetch;
 </script>
 
 <article class="mt-6 p-6 w-6/12 h-full">
   <h1 class="text-2xl font-bold pb-5">{global.title}</h1>
-  <BlocksLayout layout={global.layout} base={endpoint} {fetch} />
+  <BlocksLayout layout={global.layout} {fetch} />
 </article>

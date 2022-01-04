@@ -1,7 +1,6 @@
 <script lang="ts">
   import Text from '$lib/blocks/types/Text.svelte';
-import Anchor from '$lib/ui/Anchor.svelte';
-  export let layout, fetch, base;
+  export let layout, fetch;
 
   const blocks = [];
   
@@ -13,5 +12,5 @@ import Anchor from '$lib/ui/Anchor.svelte';
 </script>
 
 {#each blocks as block}
-  <svelte:component this={block.component} content={block.content} {fetch} {base} />
+  <svelte:component this={block.component} content={block.content} {fetch} />
 {/each}

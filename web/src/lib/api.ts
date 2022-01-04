@@ -1,28 +1,29 @@
-type Req = { method?: string, base: string, path: string, data?: string }
-type Res = Promise<{response: Response, json: any}>;
+const base = import.meta.env.VITE_BASE_ENDPOINT as string;
 
-export type Endpoint = { status: number, body: string, headers: any }
+const send = async (method, path, ssrFetch, data?)
+  : Promise<Record<string, unknown>> => {
 
-const send = async ({ method, base, path, data }: Req)
-  : Res => {
+  const _fetch = ssrFetch ? ssrFetch : fetch;
 
-  const opts: any = { method, headers: {} }
+  const opts: RequestInit = { method, headers: {} }
 
   if(data) {
     opts.headers['Content-Type'] = 'application/json';
     opts.body = JSON.stringify(data);
   }
 
-  const uri = encodeURI(`${base}/${path}`);
-  const response = await fetch(uri,opts);
-  
-  const json: any = await response.json();
+  const url = `${base}/${path}`;
 
-  return { response, json }
+  const res = await _fetch(url, opts);
+  const body = await res.json();
+
+  return { res, body };
 }
 
-export const get = ({base, path } : Req)
-  : Res => send({method: 'GET', base, path });
+export const get = (path: string, ssrFetch?: any)
+  : Promise<Record<string, unknown>> => send('GET', path, ssrFetch);
 
-export const post = ({base, path, data } : Req)
-: Res => send({method: 'POST', base, path, data });
+/*
+export const post = (path: string, data: any)
+  : Promise<Record<string, unknown>> => send('POST', path, data);
+*/

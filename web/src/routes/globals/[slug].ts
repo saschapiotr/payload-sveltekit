@@ -1,16 +1,13 @@
 import type { Request } from '@sveltejs/kit';
-import * as api from '$lib/api';
+import * as db from '$lib/db';
 
-// GET /globals/slug
-export const get = async (request: Request): Promise<any> => {
-  const endpoint = import.meta.env.VITE_API_ENDPOINT as string;
-  const { response, json } = await api.get({
-    base: endpoint,
-    path: `api/globals/${request.params.slug}`
-  });
-  return {
-    status: 200,
-    body: json,
-    headers: { ...response.headers },
-  };
+// GET /globals/{slug}
+export const get = async (req: Request)
+  : Promise<{ 
+    status: number, 
+    error?: string, body?: 
+    Record<string, unknown>}> => {
+  
+  const { slug } = req.params;
+  return { status: 200, body: await db.get(`globals/${slug}`) };
 };
