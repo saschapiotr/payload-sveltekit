@@ -1,9 +1,5 @@
 <script>
-export let mediaData;
+export let src, alt;
 </script>
 
-{#await mediaData}
-	<p>...loading image</p>
-{:then data}
-  <img src={data.src} alt={data.src} />
-{/await}
+<img {src} {alt} />

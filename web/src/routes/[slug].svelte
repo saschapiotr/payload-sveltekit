@@ -2,18 +2,30 @@
   export const load = async ({params, fetch}) => {
     const { slug } = params;
 
-    const res = await fetch(`globals/${slug}.json`);
+    const global = await fetch(`globals/${slug}.json`).then((res) => res.json());
     
-    return { props: { global: await res.json() } }
+    const blocks = [];
+    for (const block of global.layout[0].content) {
+      if(block.type !== 'upload') {
+        blocks.push(block);
+      } else {
+        const media = await fetch(`blocks/media/${block.value.id}.json`).then((res) => res.json())
+        blocks.push({
+          type: block.type,
+          children: new Array({ url: media.url, alt: media.alt })
+        })
+      }
+    };
+    return { props: { global, blocks } }
   }
 </script>
 
 <script lang="ts">
-  // import BlocksLayout from '$lib/blocks/Layout.svelte';
-  export let global;
+  import Blocks from '$lib/blocks/Layout.svelte';
+  export let global, blocks;
 </script>
 
 <article class="mt-6 p-6 w-6/12 h-full">
   <h1 class="text-2xl font-bold pb-5">{global.title}</h1>
-  <!--<BlocksLayout layout={global.layout} />-->
+  <Blocks {blocks} />
 </article>
