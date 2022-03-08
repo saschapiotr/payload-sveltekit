@@ -7,13 +7,14 @@ const app = express();
 // Initialize Payload
 payload.init({
   secret: process.env.PAYLOAD_SECRET,
-  mongoURL: process.env.MONGODB_URI,
+  mongoURL: `mongodb://${process.env.MONGO_CONTAINER_NAME}:27017${process.env.MONGODB_URL}`,
   express: app,
   onInit: () => {
+    payload.logger.info(`Mongo URL: mongodb://${process.env.MONGO_CONTAINER_NAME}:27017${process.env.MONGODB_URL}`);
     payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
   },
 });
 
 // Add your own express routes here
 
-app.listen(3001);
+app.listen(process.env.PAYLOAD_PORT);
