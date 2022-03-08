@@ -9,11 +9,13 @@
       if(block.type !== 'upload') {
         blocks.push(block);
       } else {
-        const media = await fetch(`blocks/media/${block.value.id}.json`).then((res) => res.json())
-        blocks.push({
-          type: block.type,
-          children: new Array({ url: media.url, alt: media.alt })
-        })
+        const media = await fetch(`blocks/media/${block.value.id}.json`).then((res) => res.status == 200 ? res.json(): undefined)
+        if (media) {
+          blocks.push({
+            type: block.type,
+            children: new Array({ url: media.url, alt: media.alt })
+          })
+        }
       }
     };
     return { props: { global, blocks } }
