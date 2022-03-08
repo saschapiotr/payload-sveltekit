@@ -11,7 +11,6 @@ import { element } from 'svelte/internal';
 
 
   blocks.forEach(block => {
-    console.log(block)
     elements.push({
       type: block.type,
       component: block.type === 'p' ? Paragraph : block.type === 'upload' ? Image : Heading,
