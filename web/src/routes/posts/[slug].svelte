@@ -11,8 +11,8 @@
         blocks.push(block);
       } else {
         console.log(block)
-        const media = await fetch(`blocks/media/${block.value.id}.json`)
-                            .then((res) => res.status == 200 ? res.json(): undefined)
+        const media = await fetch(`/blocks/media/${block.value.id}.json`)
+                            .then((res) => res.status == 200 ? res.json() : undefined)
         if (media) {
           blocks.push({
             type: block.type,
