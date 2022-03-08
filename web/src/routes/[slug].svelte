@@ -10,7 +10,7 @@
         blocks.push(block);
       } else {
         const media = await fetch(`blocks/media/${block.value.id}.json`)
-                            .then((res) => res.status == 200 ? res.json(): undefined)
+                            .then((res) => res.status == 200 ? res.json() : undefined)
         if (media) {
           blocks.push({
             type: block.type,
