@@ -6,15 +6,16 @@ services:
     build:
       context: ./web
       dockerfile: ./Dockerfile.prod
+      args: 
+        VITE_BASE_ENDPOINT: ${VITE_BASE_ENDPOINT}
+        VITE_API_ENDPOINT: ${VITE_API_ENDPOINT}
     restart: always
     ports:
       - "3000:3000"
-    environment:
-      - VITE_BASE_ENDPOINT=${VITE_BASE_ENDPOINT}
-      - VITE_API_ENDPOINT=${VITE_API_ENDPOINT}
-    network_mode: host
     depends_on:
       - cms
+    networks:
+      - front
   cms:
     container_name: ${CMS_CONTAINER_NAME}
     build:
@@ -31,11 +32,22 @@ services:
       - PAYLOAD_SERVER_URL=${PAYLOAD_SERVER_URL}`
     depends_on:
       - mongo
+    networks:
+      - back
+      - front
   mongo:
     container_name: ${MONGO_CONTAINER_NAME}
     image: mongo:latest
     restart: always
     volumes:
       - ./mongo/data:/data/db
+    networks:
+      - back
 
-    
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: 'false'
