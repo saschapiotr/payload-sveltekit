@@ -1,0 +1,31 @@
+FROM node:17-alpine AS builder
+
+WORKDIR /app
+
+ARG VITE_BASE_ENDPOINT
+ARG VITE_API_ENDPOINT
+
+COPY package.json package-lock.json ./
+
+RUN npm ci --production
+
+COPY . .
+
+RUN npm run build
+
+
+FROM node:17-alpine
+
+ENV NODE_ENV production
+
+USER node:node
+
+WORKDIR /app
+
+COPY --from=builder --chown=node:node /app/build ./build
+COPY --from=builder --chown=node:node /app/node_modules ./node_modules
+COPY --chown=node:node package.json .
+
+ENV PORT 3000
+
+CMD ["node","build"]

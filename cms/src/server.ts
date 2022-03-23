@@ -5,6 +5,7 @@ require('dotenv').config();
 const app = express();
 
 // Initialize Payload
+
 payload.init({
   secret: process.env.PAYLOAD_SECRET,
   mongoURL: `mongodb://${process.env.MONGO_CONTAINER_NAME}:27017${process.env.MONGODB_URL}`,

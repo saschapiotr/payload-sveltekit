@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+
+  nginx:
+    container_name: ${PROXY_CONTAINER_NAME}
+    image: bunkerity/bunkerized-nginx
+    restart: always
+    depends_on:
+      - web
+      - cms
+    ports:
+      - ${HOST_HTTP_PORT}:8080
+      - ${HOST_HTTPS_PORT}:8443
+    volumes:
+     - ./letsencrypt:/etc/letsencrypt
+     - ./http-confs:/opt/bunkerized-nginx/http-confs:ro
+     - ./server-confs:/opt/bunkerized-nginx/server-confs:ro
+    environment:
+     - SERVER_NAME=www.example.com
+     - USE_REVERSE_PROXY=yes
+     - REVERSE_PROXY_URL=/hi
+     - REVERSE_PROXY_HOST=http://payload-svelte-web:3000/
+    networks:
+      - proxy
+
+  web:
+    container_name: ${WEB_CONTAINER_NAME}
+    build:
+      context: ./web
+      dockerfile: ./Dockerfile.prod
+      args: 
+        VITE_BASE_ENDPOINT: ${VITE_BASE_ENDPOINT}
+        VITE_API_ENDPOINT: ${VITE_API_ENDPOINT}
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - cms
+    networks:
+      - proxy
+
+  cms:
+    container_name: ${CMS_CONTAINER_NAME}
+    build:
+      context: ./cms
+      dockerfile: ./Dockerfile.prod
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_CONTAINER_NAME=${MONGO_CONTAINER_NAME}
+      - MONGODB_URL=${MONGODB_URL}
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+      - PAYLOAD_PORT=${PAYLOAD_PORT}
+      - PAYLOAD_SERVER_URL=${PAYLOAD_SERVER_URL}`
+    depends_on:
+      - mongo
+    networks:
+      - back
+      - proxy
+
+  mongo:
+    container_name: ${MONGO_CONTAINER_NAME}
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./mongo/data:/data/db
+    networks:
+      - back
+
+networks:
+  proxy:
+  back:
+    internal: true

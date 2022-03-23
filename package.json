@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "sudo docker-compose -f docker-compose.dev.yml --env-file ./.env.development up --remove-orphans",
-    "dev:rebuild": "sudo docker-compose -f docker-compose.dev.yml --env-file ./.env.development up --build web cms --force-recreate --remove-orphans",
-    "dev:detach": "sudo docker-compose -f docker-compose.dev.yml --env-file ./.env.development up -d --remove-orphans"
+    "dev": "docker-compose -f docker-compose.dev.yml --env-file ./.env.dev up --remove-orphans",
+    "dev:rebuild": "docker-compose -f docker-compose.dev.yml --env-file ./.env.dev up --build web cms --force-recreate --remove-orphans",
+    "dev:detach": "docker-compose -f docker-compose.dev.yml --env-file ./.env.dev up -d --remove-orphans",
+    "preview": "docker-compose -f docker-compose.yml --env-file ./.env up --remove-orphans",
+    "preview:rebuild": "docker-compose -f docker-compose.yml --env-file ./.env up --build web cms nginx --force-recreate --remove-orphans",
+    "preview:detach": "docker-compose -f docker-compose.yml --env-file ./.env up -d --remove-orphans"
   },
   "repository": {
     "type": "git",
@@ -25,9 +28,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "workspaces": [
-    "cms",
-    "web"
-  ]
+  }
 }
