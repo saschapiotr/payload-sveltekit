@@ -8,7 +8,7 @@
     "dev:rebuild": "docker-compose -f docker-compose.dev.yml --env-file ./.env.dev up --build web cms --force-recreate --remove-orphans",
     "dev:detach": "docker-compose -f docker-compose.dev.yml --env-file ./.env.dev up -d --remove-orphans",
     "preview": "docker-compose -f docker-compose.yml --env-file ./.env up --remove-orphans",
-    "preview:rebuild": "docker-compose -f docker-compose.yml --env-file ./.env up --build web cms --force-recreate --remove-orphans",
+    "preview:rebuild": "docker-compose -f docker-compose.yml --env-file ./.env up --build web cms nginx --force-recreate --remove-orphans",
     "preview:detach": "docker-compose -f docker-compose.yml --env-file ./.env up -d --remove-orphans"
   },
   "repository": {
