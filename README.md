@@ -1,5 +1,7 @@
 # payload-sveltekit 
 
+*Not yet usable!*
+
 Payload-Sveltekit is a Web Development Template Repository.
 
 ## Installation
